@@ -1,0 +1,40 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: loadbalancer-service
+  namespace: metallb-system
+spec:
+  type: LoadBalancer
+  # clusterIP: 10.96.10.10
+  selector:
+    app: webui
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      # nodePort: 30000
+
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: webui
+  namespace: metallb-system
+spec: 
+  replicas: 3
+  selector:
+    matchLabels:
+      app: webui
+  template:
+    metadata:
+      name: webui-pod
+      labels:
+        app: webui
+    spec:
+      containers:
+        - name: webui-container
+          image: nginx:1.14
+          ports:
+            - containerPort: 80
+              protocol: TCP 

@@ -1,0 +1,9 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: externalname-svc
+spec:
+  type: ExternalName
+  externalName: google.com
+  # externalname-svc.default.svc.cluster.local <-> google.com

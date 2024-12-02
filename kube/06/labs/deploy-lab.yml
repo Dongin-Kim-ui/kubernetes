@@ -1,0 +1,32 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: web-deploy
+  annotations: 
+    kubernetes.io/change-cause: version 2.4
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      web: apache
+      app: main
+      rel: stable
+      tier: frontend
+  template:
+    metadata:
+      name: web-pod
+      labels:
+        web: apache
+        app: main
+        rel: stable
+        tier: frontend
+    spec:
+      containers:
+        - name: web-container
+          image: httpd:2.4
+          ports:
+            - containerPort: 80
+              protocol: TCP
+
+

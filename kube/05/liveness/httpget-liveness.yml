@@ -1,0 +1,19 @@
+---
+kind: Pod
+apiVersion: v1
+metadata:
+  name: http-liveness
+spec:
+  containers:
+  - name: liveness
+    image: registry.k8s.io/e2e-test-images/agnhost:2.40
+    args:
+    - liveness
+    livenessProbe:
+      httpGet:
+        path: /healthz
+        port: 8080
+        httpHeaders:
+        - name: Custom-Header
+          value: Awesome
+      periodSeconds: 3

@@ -1,0 +1,14 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: rolling-svc
+spec:
+#  type: ClusterIP
+#  clusterIP: 10.233.10.10
+  selector:
+    app: web
+    version: stable
+  ports:
+    - port: 80
+      targetPort: 8080

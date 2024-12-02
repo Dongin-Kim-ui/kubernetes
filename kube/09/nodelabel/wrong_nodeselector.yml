@@ -1,0 +1,15 @@
+---
+kind: Pod
+apiVersion: v1
+metadata:
+  name: wrong-pod-nodeselector
+spec:
+  nodeSelector:
+    gpu: "true"
+    disk: ssd
+    mem: high
+  containers:
+    - name: nginx-container
+      image: nginx:1.14
+      ports:
+        - containerPort: 80

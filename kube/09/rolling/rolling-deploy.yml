@@ -1,0 +1,26 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: rolling-deploy
+  annotations:
+    kubernetes.io/change-cause: version 3.0
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: web
+      version: stable
+  template: 
+    metadata:
+      name: rolling-pod
+      labels:
+        app: web
+        version: stable
+    spec:
+      containers:
+        - name: rolling-container
+          image: whatwant/node-web:2.0
+          ports:
+            - containerPort: 8080
+

@@ -1,0 +1,26 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: app-deploy
+  annotations:
+    Kubernetes.io/change-cause: version 1.15
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: webui
+  template:
+    metadata:
+      name: nginx-pod
+      labels:
+        app: webui
+    spec:
+      containers:
+        - name: web
+          image: nginx:1.15
+          ports:
+            - containerPort: 80
+              protocol: TCP
+      
+
+    

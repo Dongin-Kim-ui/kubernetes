@@ -1,0 +1,38 @@
+---
+# Deployment
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: webui
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: webui
+  template:
+    metadata:
+      name: webui-pod
+      labels:
+        app: webui
+    spec:
+      containers:
+        - name: webui-container
+          image: nginx:1.14
+          ports:
+            - containerPort: 80
+              protocol: TCP
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: headless-service
+spec:
+  type: ClusterIP
+  clusterIP: None
+  selector:
+    app: webui
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80

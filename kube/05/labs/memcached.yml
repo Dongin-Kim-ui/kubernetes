@@ -1,0 +1,20 @@
+---
+kind: Pod
+apiVersion: v1
+metadata:
+  name: memcached
+spec:
+  containers:
+    - name: memcached-container
+      image: memcached
+      ports:
+        - containerPort: 11211
+          protocol: TCP
+
+
+
+
+
+
+        
+

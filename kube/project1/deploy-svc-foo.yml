@@ -1,0 +1,34 @@
+---
+#  Deployment (labels(app: foo-app) x 2)
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: foo-deploy
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: foo-app
+  template:
+    metadata:
+      labels:
+        app: foo-app
+    spec:
+      containers:
+      - name: foo-container
+        image: whatwant/node-web:2.0
+        ports:
+        - containerPort: 8080
+
+---
+# (service(foo-svc):4200)Service(labels(app: foo-app):8080)
+kind: Service
+apiVersion: v1
+metadata:
+  name: foo-svc
+spec:
+  selector:
+    app: foo-app
+  ports:
+  - port: 4200
+    targetPort: 8080

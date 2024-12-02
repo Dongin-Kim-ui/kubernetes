@@ -1,0 +1,14 @@
+---
+kind: Pod
+apiVersion: v1
+metadata:
+  name: pod-nodeselector
+spec:
+  nodeSelector:
+    gpu: "true"
+    disk: ssd
+  containers:
+    - name: nginx-container
+      image: nginx:1.14
+      ports:
+        - containerPort: 80

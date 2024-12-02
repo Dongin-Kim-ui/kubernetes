@@ -1,0 +1,21 @@
+---
+kind: ReplicationController
+apiVersion: v1
+metadata:
+  name: nginx-rc
+spec:
+  replicas: 3
+  selector:
+    app: webui
+  template:
+    metadata:
+      name: nginx-pod
+      labels:
+        app: webui
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx:1.14
+          ports:
+            - containerPort: 80
+              protocol: TCP
